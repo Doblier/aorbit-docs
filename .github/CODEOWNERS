@@ -1,0 +1,13 @@
+# Replace the placeholder handles with real GitHub usernames or a team, e.g. @Doblier/docs-owners
+# The matching owner is auto-requested as reviewer on every PR touching these paths.
+
+*                           @REPLACE-release-owner
+/platform/architecture/     @REPLACE-architect
+/orca/architecture/         @REPLACE-architect
+/orca/deployment/           @REPLACE-sre-lead
+/orca/operations/           @REPLACE-sre-lead
+/orca/readiness/            @REPLACE-sre-lead
+/platform/security/         @REPLACE-security-owner
+/platform/release/          @REPLACE-release-owner
+/orca/release-notes/        @REPLACE-release-owner
+/docs.json                  @REPLACE-release-owner

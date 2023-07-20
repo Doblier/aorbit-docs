@@ -1,0 +1,22 @@
+---
+title: "DLQ Replay CLI"
+description: "orca-dlq-replay — inspect and selectively replay dead-lettered events."
+---
+
+A dead-letter queue with no replay is a forensic dead-end. `orca-dlq-replay` provides inspection and selective replay, with a companion NOC panel.
+
+<Note>Draft skeleton — document each command with examples. Owner: SRE lead.</Note>
+
+## Install & authenticate
+
+## Inspect the DLQ
+
+Filter by time range, source, and failure class (e.g., schema errors).
+
+## Selective replay
+
+Replay semantics, ordering, and throughput controls.
+
+## Replay safety
+
+Idempotency guarantees and interaction with the dedup stage — replayed events must not create duplicate incidents.

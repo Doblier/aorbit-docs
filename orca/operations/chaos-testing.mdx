@@ -1,0 +1,20 @@
+---
+title: "Chaos Test Suite (Gate 6)"
+description: "Seven mandatory fault experiments against production-sized state."
+---
+
+One SRE week embedded inside shadow mode. Seven faults are injected against **production-sized state**; documented recovery times become the on-call runbook. **All 7 must pass**, signed off by the SRE lead — this is go-live Gate 6.
+
+For each experiment document: injection method/script · preconditions (state size!) · pass criteria · rollback · evidence captured.
+
+| # | Experiment | Pass criteria |
+|---|---|---|
+| 1 | Kill Redis master | Failover < 10s, zero event loss |
+| 2 | Kill Neo4j replica | Enrichment continues, +< 100ms |
+| 3 | ServiceNow webhook outage | Fallback poll < 60s |
+| 4 | Crash Flink task manager | Checkpoint recovery < 60s |
+| 5 | Take Schema Registry down | Local cache serves 30 min |
+| 6 | Kill ClickHouse node | HA failover, 0 records lost |
+| 7 | Kill Kafka broker | Rebalance < 30s, 0 message loss |
+
+<Warning>Vendor failover claims (e.g., Redis "< 5s") must be verified against your own dedup-state size and client configuration (e.g., Lettuce) before being trusted in production. Note: the newer Kafka consumer-rebalance protocol materially helps experiment 7.</Warning>

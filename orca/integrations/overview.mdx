@@ -1,0 +1,20 @@
+---
+title: "Integrations"
+description: "ORCA plugs into the observability stack you already have."
+---
+
+One page per connector will document: authentication, required permissions, configuration, field mapping, failure/fallback behavior, and rate limits.
+
+| Source | Type | Fallback behavior |
+|---|---|---|
+| Splunk | Events/logs | |
+| ServiceNow | ITSM + webhook | Webhook outage → polling fallback < 60s |
+| AppDynamics | APM | |
+| PagerDuty | Alerting | |
+| Grafana | Alerting | |
+| Datadog | Monitoring | |
+| New Relic | Monitoring | |
+| SNMP traps | Network | |
+| Custom via API | Any | See [API](/orca/api/overview) |
+
+<Note>ORCA runs alongside your existing ITSM: correlate and diagnose here, hand tickets off there. Never rip-and-replace.</Note>

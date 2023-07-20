@@ -1,0 +1,37 @@
+---
+title: "Security Whitepaper"
+description: "AORBIT security architecture, data protection, and secure development practices."
+---
+
+<Note>Draft skeleton — every control must carry an honest status: implemented / roadmap. Owner: security.</Note>
+
+## Security architecture overview
+
+Trust boundaries, data-flow diagram, and in-tenant deployment as the primary control: customer data never leaves the customer perimeter.
+
+## Data protection
+
+- **At rest** — encryption per datastore: Kafka, Neo4j, ClickHouse, PostgreSQL, Redis, MinIO.
+- **In transit** — TLS everywhere; mTLS service-to-service.
+- **Key management** — KMS/HSM integration options.
+- **Classification & retention** — per data category.
+
+## Identity & access
+
+Human SSO (OIDC/SAML) · agent identity binding · RBAC model · secrets management.
+
+## Audit integrity
+
+Tamper-evident audit chain design (hashing/anchoring approach) and the customer-runnable verification procedure.
+
+## Secure development
+
+SDLC controls, dependency scanning, container image signing (cosign), SBOM (CycloneDX) shipped with every release.
+
+## Vulnerability management
+
+Scanning cadence, patch SLAs by severity, and the [coordinated disclosure policy](/platform/security/vulnerability-disclosure).
+
+## Penetration testing
+
+Third-party test cadence and how customers request the current attestation letter.

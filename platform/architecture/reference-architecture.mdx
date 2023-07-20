@@ -1,0 +1,46 @@
+---
+title: "AORBIT Reference Architecture"
+description: "The five-capability spine, layered architecture, and deployment models."
+---
+
+<Note>Draft skeleton — fill each section, then remove this note. Owner: architect.</Note>
+
+## Purpose & audience
+
+Enterprise architects, security reviewers, and prospective design partners evaluating how AORBIT fits an existing estate.
+
+## The five-capability spine
+
+For each capability: responsibility, interfaces, and what reads/writes it.
+
+1. **Truth** — the runtime CMDB/CSDM graph; the system-of-record every other capability reads from.
+2. **Governance** — policy envelopes, spend budgets, identity binding; enforcement at the checkpoint.
+3. **Audit** — the tamper-evident, cryptographically verifiable record.
+4. **Payments** — governed agent payments on national rails (mada · SADAD · Sarie).
+5. **Inference** — the private, in-tenant serving path; owning the path makes governance enforceable.
+
+## Layered architecture
+
+| Layer | Components |
+|---|---|
+| Governance | Policy review · Compliance engines · Audit trails · Regulatory reporting |
+| Application | AI agents · Coding tools · RPA · Digital asset operations · Agentic payments |
+| Operations | AIOps · Observability · Auto-remediation · Runbook automation · Human-in-the-loop |
+| Intelligence | LLM inference · Multi-model orchestration · RAG pipelines · Fine-tuning · Prompt management |
+| Infrastructure | GPU compute (NVIDIA) · Kubernetes · Secure networking · API gateway |
+
+Read top-to-bottom = outside-in. Build bottom-to-top = infrastructure first.
+
+## Deployment models
+
+- **In-tenant / sovereign** — full stack in-region under local data-residency (KSA profile).
+- **Air-gapped** — no internet egress; offline install and update path.
+- **Alongside existing ITSM** — interoperate, never rip-and-replace.
+
+## Cross-cutting concerns
+
+Identity & agent identity binding · tenancy & isolation · encryption in transit/at rest · high availability & DR posture · upgrade philosophy (the architecture absorbs change).
+
+## Diagrams
+
+Maintain C4 level 1 (system context) and level 2 (containers) as Mermaid here so they are versioned with the text.

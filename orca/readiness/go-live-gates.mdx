@@ -1,0 +1,25 @@
+---
+title: "Production Readiness: Go-Live Gates"
+description: "The gated framework every ORCA deployment passes before production."
+---
+
+Every ORCA deployment passes a gated readiness framework with defined entry/exit criteria and named sign-offs. Sign-off roles span streaming, SRE, deployment, data, schema, and compliance; the evidence bundle is archived per gate.
+
+<Note>Define gates 1–5 from the engagement playbook (install verified · sources connected · data quality · SLOs met · security review), then remove this note. Owner: SRE lead.</Note>
+
+| Gate | Name | Exit criteria (summary) |
+|---|---|---|
+| 1 | Installation verified | |
+| 2 | Sources connected | |
+| 3 | Data quality | |
+| 4 | SLOs met | |
+| 5 | Security review | |
+| 6 | **Chaos testing** | All [7 fault experiments](/orca/operations/chaos-testing) pass against production-sized state; SRE lead sign-off |
+
+## Shadow mode — six weeks
+
+ORCA runs alongside existing operations with no production actions for **six weeks, not four**: the window must cover **month-end + a T1 change window + off-hours** — the key test of suppression correctness. Four weeks can miss a maintenance window entirely.
+
+## Sign-off
+
+Roles, evidence bundle contents, and archive location per gate.

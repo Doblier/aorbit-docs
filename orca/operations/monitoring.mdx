@@ -1,0 +1,25 @@
+---
+title: "Self-Monitoring & Dashboards"
+description: "The control tower: 18 platform self-metrics and 4 go-live Grafana panels."
+---
+
+An observability platform that cannot observe itself is a liability at 2 a.m. The control tower monitors ORCA's own components so degradation is detected before it corrupts incident accuracy.
+
+## The four go-live panels (required)
+
+| # | Panel | Shows |
+|---|---|---|
+| 1 | Pipeline throughput | Events/sec per stage, by tier |
+| 2 | Latency heatmap | Ingestion → incident; T1 p99 < 5s |
+| 3 | External dependency status | Traffic-light per circuit breaker |
+| 4 | Data-quality scorecard | HIGH / MED / LOW per source tool |
+
+Dashboard JSON ships in every release package.
+
+## The 18 self-metrics
+
+<Note>List each metric: name, meaning, alert threshold. Owner: SRE lead.</Note>
+
+## SLOs
+
+Multi-burn-rate alerting on 5m / 1h / 6h / 30d windows (Google SRE standard).

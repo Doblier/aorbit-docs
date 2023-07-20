@@ -1,0 +1,24 @@
+---
+title: "Technology Stack"
+description: "The complete software list with supported versions and decision rationale."
+---
+
+<Note>Single source of truth for versions — updated in the same PR as any release that changes them.</Note>
+
+| Component | Role | Supported version(s) | Notes |
+|---|---|---|---|
+| Apache Kafka | Event backbone | 3.x KRaft · greenfield: 4.0+ | Kafka 4.0 is KRaft-only; the newer consumer-rebalance protocol materially improves broker-failure recovery |
+| Apache Flink | Stream processing | 2.2, RocksDB state | Disaggregated state backend under evaluation |
+| Neo4j Enterprise | Dependency/truth graph | 2026.02, Cypher 25 | |
+| ClickHouse | Incident/event store | 25.x | argMax point-in-time replay; CoalescingMergeTree an option |
+| Redis Cluster | Dedup state | 7.x | Failover target < 10s — chaos-verified per deployment, never vendor-claimed |
+| PostgreSQL | Suppression rules, config | | |
+| MinIO | Object storage | | |
+| Debezium | Change data capture | | |
+| Schema Registry | Event schemas | | Local schema cache serves 30 min during registry outage |
+| Prometheus + Grafana | SLOs + dashboards | | Multi-burn-rate windows: 5m / 1h / 6h / 30d |
+| Kubernetes | Orchestration | | List supported distros & versions |
+
+<Warning>Vendor performance claims are not accepted as-is. Every failover/recovery figure in this stack is verified against production-sized state in [chaos testing](/orca/operations/chaos-testing) before it appears in customer-facing documentation.</Warning>
+
+Also maintained here: base images, OS versions, TLS libraries — kept in sync with the SBOM shipped per release.

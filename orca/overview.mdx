@@ -1,0 +1,38 @@
+---
+title: "ORCA — IT Operations & AIOps"
+description: "Deterministic, CMDB-driven operations. Explainable, auditable, measured in MTTR."
+---
+
+ORCA correlates events by the **real dependency graph** in the CMDB/CSDM truth layer — not statistical guesswork. Hundreds of related alerts collapse into one incident, and every grouping is explainable and auditable.
+
+## Modules & status
+
+| Module | Status |
+|---|---|
+| Event Ingestion | GA |
+| ORCA Correlation | GA |
+| Root-Cause Analysis | GA |
+| Guided Remediation | Pilot |
+| Feedback Loop | Pilot |
+
+## The pipeline at a glance
+
+```mermaid
+flowchart LR
+  S[Sources] --> N[1. Normalize] --> D[2. Dedup] --> E[3. Enrich] --> P[4. Suppress] --> C[5. Correlate] --> I[6. Incident]
+```
+
+<Tip>**Healthy shape:** event volume decreases monotonically left-to-right. Any stage whose output exceeds its input signals duplication; any stage dropping to zero signals a blocked consumer.</Tip>
+
+## From alert to closed incident
+
+Ingest → Correlate → Diagnose (root cause + evidence trail) → Match runbook → Approve (human-in-the-loop, configurable thresholds) → Learn (outcomes update the graph).
+
+## Where to go next
+
+<CardGroup cols={2}>
+  <Card title="Solution Architecture" icon="diagram-project" href="/orca/architecture/solution-architecture" />
+  <Card title="Install" icon="download" href="/orca/deployment/installation" />
+  <Card title="Sizing Guide" icon="server" href="/orca/deployment/sizing" />
+  <Card title="Go-Live Gates" icon="flag-checkered" href="/orca/readiness/go-live-gates" />
+</CardGroup>

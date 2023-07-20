@@ -1,0 +1,31 @@
+---
+title: "Installation"
+description: "Standard installation flow from verified package to healthy pipeline."
+---
+
+<Note>Draft skeleton. Owner: SRE lead.</Note>
+
+<Steps>
+  <Step title="Obtain & verify the release package">
+    See [Release Packages & Verification](/platform/release/release-package).
+  </Step>
+  <Step title="Prepare the cluster">
+    Namespace, secrets, storage classes per [Prerequisites](/orca/deployment/requirements).
+  </Step>
+  <Step title="Install datastores">
+    Or attach existing ones — installation order and health checks.
+  </Step>
+  <Step title="Install the streaming layer">
+    Kafka, Schema Registry, Flink, Debezium.
+  </Step>
+  <Step title="Install ORCA services and the control tower">
+  </Step>
+  <Step title="Import dashboards & alert rules">
+    Grafana JSON ships in the release package.
+  </Step>
+  <Step title="Connect the first source and validate">
+    Confirm the healthy pipeline shape: event volume decreases monotonically across stages.
+  </Step>
+  <Step title="Run smoke tests and sign off">
+  </Step>
+</Steps>

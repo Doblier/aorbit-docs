@@ -1,0 +1,33 @@
+---
+title: "Release Packages & Verification"
+description: "What ships in every AORBIT release and how to verify a download."
+---
+
+Every product release is a signed, versioned bundle:
+
+```text
+<product>-<version>/
+  charts/            Helm charts
+  images/            Container image manifest (registry refs + digests)
+  install/           Installation & air-gapped guide
+  dashboards/        Grafana dashboard JSON
+  chaos/             Chaos test suite + pass criteria
+  sbom/              CycloneDX SBOM per image
+  RELEASE-NOTES.md
+  SHA256SUMS
+  SHA256SUMS.sig
+  LICENSE
+```
+
+## Verifying a download
+
+```bash
+sha256sum -c SHA256SUMS
+cosign verify-blob --key doblier.pub --signature SHA256SUMS.sig SHA256SUMS
+```
+
+<Info>The Doblier release signing public key is published here: _(add key + fingerprint)_.</Info>
+
+## Obtaining releases
+
+Release packages, container registry access, and license keys are **not public**. Customers receive per-customer credentials to the Doblier artifact registry under their license entitlement. Contact your account team or **support@doblier.io**.

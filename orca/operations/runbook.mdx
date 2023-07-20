@@ -1,0 +1,24 @@
+---
+title: "On-Call Runbook"
+description: "Failure scenarios with measured recovery targets from chaos testing."
+---
+
+<Warning>Recovery times on this page are **measured** in the deployment's chaos tests — never assumed and never copied from vendor documentation. Regenerate this page from each deployment's chaos results.</Warning>
+
+For each scenario: symptoms → dashboard/alert reference → recovery procedure → measured target → escalation path.
+
+| # | Scenario | Measured recovery target |
+|---|---|---|
+| 1 | Redis master lost | Failover < 10s, zero event loss |
+| 2 | Neo4j replica lost | Enrichment continues, latency +< 100ms |
+| 3 | ServiceNow webhook outage | Fallback poll engages < 60s |
+| 4 | Flink task-manager crash | Checkpoint recovery < 60s |
+| 5 | Schema Registry down | Local cache serves 30 min |
+| 6 | ClickHouse node lost | HA failover, 0 records lost |
+| 7 | Kafka broker lost | Rebalance < 30s, 0 message loss |
+
+## Pipeline-shape incidents
+
+- **Stage output → 0** — blocked consumer: diagnosis and recovery.
+- **Stage output > input** — duplication: diagnosis and recovery.
+- **DLQ growth** — triage and [replay procedure](/orca/operations/dlq-replay).

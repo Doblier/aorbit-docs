@@ -1,0 +1,30 @@
+---
+title: "Hardware Sizing Guide"
+description: "S/M/L deployment tiers and per-component sizing math."
+---
+
+<Note>Seed tiers from anonymized production-scale measurements. Infrastructure teams block on this page. Owner: SRE lead.</Note>
+
+## Sizing tiers
+
+| Tier | Events/day (raw) | Peak events/sec | Nodes | Total vCPU / RAM | Storage |
+|---|---|---|---|---|---|
+| S — pilot | | | | | |
+| M | | | | | |
+| L — bank-scale | | | | | |
+
+## Per-component sizing
+
+- **Kafka** — broker count, partition strategy, retention vs disk.
+- **Flink** — task managers; RocksDB state sizing (dedup-state size drives both Flink memory and Redis).
+- **Neo4j** — heap/pagecache vs graph size.
+- **ClickHouse** — storage/retention math for the incident store.
+- **Redis Cluster** — memory vs dedup window per tier.
+
+## Kubernetes resources
+
+Requests/limits table per workload · storage classes · anti-affinity rules.
+
+## Capacity assumptions
+
+Ingest bandwidth, inter-AZ traffic, growth headroom guidance.

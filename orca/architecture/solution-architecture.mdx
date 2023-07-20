@@ -1,0 +1,42 @@
+---
+title: "Solution Architecture"
+description: "The seven-stage pipeline, streaming backbone, control tower, and human-in-the-loop remediation."
+---
+
+<Note>Master technical document — generalized and de-branded. Owner: architect.</Note>
+
+## System context
+
+**Sources:** Splunk, ServiceNow, AppDynamics, PagerDuty, Grafana, Datadog, New Relic, SNMP traps, custom API.
+**Downstream:** incident handoff into the customer's ITSM.
+**Dependency:** the CMDB/CSDM truth graph.
+
+## The seven-stage pipeline
+
+For each stage document: purpose, technology, scaling unit, failure mode.
+
+| # | Stage | Technology | Notes |
+|---|---|---|---|
+| — | Sources / Ingest | Connectors | Normalization to CI model at intake |
+| 1 | Normalize | Schema Registry + tier tag | |
+| 2 | Dedup | Redis Cluster, per-tier window | Dedup-state size drives memory sizing |
+| 3 | Enrich | Neo4j + CMDB lookup | |
+| 4 | Suppress | PostgreSQL rules | Maintenance windows, known noise |
+| 5 | Correlate | Neo4j topology blast radius | Deterministic, explainable grouping |
+| 6 | Incident | ClickHouse event store | argMax point-in-time replay; audit-ready |
+
+## Streaming backbone
+
+Kafka (KRaft) topics & partitioning strategy · Flink jobs with RocksDB state and checkpointing · Debezium CDC · MinIO object storage · DLQ design and [replay path](/orca/operations/dlq-replay).
+
+## Control tower (self-monitoring)
+
+The platform monitors its own health so a degraded component is detected **before** it corrupts incident accuracy. Watched: Flink, Kafka, Redis, Neo4j, ClickHouse, MinIO, Debezium. 18 self-metrics feed the [go-live dashboards](/orca/operations/monitoring).
+
+## Human-in-the-loop remediation
+
+Runbook matching → approval thresholds (auto-approve low-risk; sign-off for critical systems) → ITSM handoff → outcome feedback into the graph. ORCA recommends; you decide.
+
+## Non-functional targets
+
+T1 ingestion→incident p99 < 5s · component recovery targets are **measured** in [chaos testing](/orca/operations/chaos-testing) · availability model.
