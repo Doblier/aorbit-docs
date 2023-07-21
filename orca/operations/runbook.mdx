@@ -1,11 +1,9 @@
 ---
 title: "On-Call Runbook"
-description: "Failure scenarios with measured recovery targets from chaos testing."
+description: "Every recovery time in an ORCA runbook is measured in your environment — never assumed."
 ---
 
-<Warning>Recovery times on this page are **measured** in the deployment's chaos tests — never assumed and never copied from vendor documentation. Regenerate this page from each deployment's chaos results.</Warning>
-
-For each scenario: symptoms → dashboard/alert reference → recovery procedure → measured target → escalation path.
+An ORCA runbook is **generated from evidence**: the mandatory [chaos suite](/orca/operations/chaos-testing) injects seven faults against production-sized state in your environment, and the documented recovery times become your on-call runbook. These are the reference targets a deployment must meet before go-live:
 
 | # | Scenario | Measured recovery target |
 |---|---|---|
@@ -17,8 +15,8 @@ For each scenario: symptoms → dashboard/alert reference → recovery procedure
 | 6 | ClickHouse node lost | HA failover, 0 records lost |
 | 7 | Kafka broker lost | Rebalance < 30s, 0 message loss |
 
-## Pipeline-shape incidents
+Beyond component faults, the runbook covers the pipeline-shape invariant: a stage's output exceeding its input (duplication), a stage dropping to zero (blocked consumer), and DLQ growth with the [selective replay procedure](/orca/operations/dlq-replay).
 
-- **Stage output → 0** — blocked consumer: diagnosis and recovery.
-- **Stage output > input** — duplication: diagnosis and recovery.
-- **DLQ growth** — triage and [replay procedure](/orca/operations/dlq-replay).
+The full runbook — symptoms, dashboards, step-by-step recovery procedures, escalation paths — is customer documentation, generated per deployment from your own chaos results and delivered at Gate 6 sign-off.
+
+<Snippet file="cta-architect.mdx" />

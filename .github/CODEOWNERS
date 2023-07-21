@@ -10,4 +10,4 @@
 /platform/security/         @REPLACE-security-owner
 /platform/release/          @REPLACE-release-owner
 /orca/release-notes/        @REPLACE-release-owner
-/docs.json                  @REPLACE-release-owner
+/mint.json                  @REPLACE-release-owner

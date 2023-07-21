@@ -1,0 +1,131 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "AORBIT Documentation",
+  "colors": {
+    "primary": "#D97706",
+    "light": "#F5B942",
+    "dark": "#B45309"
+  },
+  "logo": {
+    "light": "https://doblier.io/site/assets/doblier_horizontal.svg",
+    "dark": "https://doblier.io/site/assets/doblier_horizontal.svg",
+    "href": "https://doblier.io"
+  },
+  "favicon": "/favicon.svg",
+  "modeToggle": {
+    "default": "dark"
+  },
+  "topbarLinks": [
+    {
+      "name": "doblier.io",
+      "url": "https://doblier.io"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Talk to an architect",
+    "url": "https://doblier.io/#contact"
+  },
+  "tabs": [
+    {
+      "name": "ORCA",
+      "url": "orca"
+    },
+    {
+      "name": "Release Notes",
+      "url": "orca/release-notes"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting started",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "group": "Architecture",
+      "pages": [
+        "platform/architecture/reference-architecture"
+      ]
+    },
+    {
+      "group": "Security & Trust",
+      "pages": [
+        "platform/security/security-whitepaper",
+        "platform/security/compliance-mappings",
+        "platform/security/vulnerability-disclosure"
+      ]
+    },
+    {
+      "group": "Releases",
+      "pages": [
+        "platform/release/versioning-policy",
+        "platform/release/release-package"
+      ]
+    },
+    {
+      "group": "Overview",
+      "pages": [
+        "orca/overview"
+      ]
+    },
+    {
+      "group": "Architecture",
+      "pages": [
+        "orca/architecture/solution-architecture",
+        "orca/architecture/technology-stack",
+        "orca/architecture/data-model"
+      ]
+    },
+    {
+      "group": "Deployment",
+      "pages": [
+        "orca/deployment/requirements",
+        "orca/deployment/sizing",
+        "orca/deployment/installation",
+        "orca/deployment/air-gapped",
+        "orca/deployment/upgrade-rollback"
+      ]
+    },
+    {
+      "group": "Operations",
+      "pages": [
+        "orca/operations/runbook",
+        "orca/operations/chaos-testing",
+        "orca/operations/monitoring",
+        "orca/operations/dlq-replay",
+        "orca/operations/backup-dr",
+        "orca/operations/cmdb-governance"
+      ]
+    },
+    {
+      "group": "Integrations",
+      "pages": [
+        "orca/integrations/overview"
+      ]
+    },
+    {
+      "group": "API",
+      "pages": [
+        "orca/api/overview"
+      ]
+    },
+    {
+      "group": "Production Readiness",
+      "pages": [
+        "orca/readiness/go-live-gates"
+      ]
+    },
+    {
+      "group": "ORCA",
+      "pages": [
+        "orca/release-notes/1-0-0"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/Doblier",
+    "linkedin": "https://www.linkedin.com/company/doblier",
+    "twitter": "https://twitter.com/doblier_io"
+  }
+}

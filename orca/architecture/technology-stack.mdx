@@ -3,15 +3,15 @@ title: "Technology Stack"
 description: "The complete software list with supported versions and decision rationale."
 ---
 
-<Note>Single source of truth for versions — updated in the same PR as any release that changes them.</Note>
+<Note>Version baseline: July 19, 2023. Single source of truth for versions — updated in the same PR as any release that changes them.</Note>
 
 | Component | Role | Supported version(s) | Notes |
 |---|---|---|---|
-| Apache Kafka | Event backbone | 3.x KRaft · greenfield: 4.0+ | Kafka 4.0 is KRaft-only; the newer consumer-rebalance protocol materially improves broker-failure recovery |
-| Apache Flink | Stream processing | 2.2, RocksDB state | Disaggregated state backend under evaluation |
-| Neo4j Enterprise | Dependency/truth graph | 2026.02, Cypher 25 | |
-| ClickHouse | Incident/event store | 25.x | argMax point-in-time replay; CoalescingMergeTree an option |
-| Redis Cluster | Dedup state | 7.x | Failover target < 10s — chaos-verified per deployment, never vendor-claimed |
+| Apache Kafka | Event backbone | 3.4.1, KRaft | Consumer-group recovery is verified through chaos testing |
+| Apache Flink | Stream processing | 1.17.1, RocksDB state | Checkpoints stored in MinIO |
+| Neo4j Enterprise | Dependency/truth graph | 5.9.0, Cypher 5 | |
+| ClickHouse | Incident/event store | 23.3 | argMax point-in-time replay |
+| Redis Cluster | Dedup state | 7.0 | Failover target < 10s — chaos-verified per deployment, never vendor-claimed |
 | PostgreSQL | Suppression rules, config | | |
 | MinIO | Object storage | | |
 | Debezium | Change data capture | | |

@@ -1,12 +1,14 @@
 ---
 title: "Air-Gapped & Sovereign Install"
-description: "Installing and updating ORCA with no internet egress."
+description: "ORCA runs with zero internet egress — built for data-residency and regulated perimeters."
 ---
 
-<Note>Draft skeleton. Owner: SRE lead.</Note>
+The same Helm charts deploy three profiles: standard in-tenant, **sovereign** (in-region, data-residency pinned, KSA profile available), and **fully air-gapped** — no internet egress at install time or runtime.
 
-- Mirroring container images to the local registry
-- Offline Helm chart repository
-- Offline import of schemas and dashboards
-- Offline license activation
-- Update procedure without internet access
+What the air-gapped profile covers: container images mirrored to your local registry with digests preserved, offline Helm repository, offline schema and dashboard import, offline license activation, and an update path that never requires a connection.
+
+<Info>Sovereignty here is architectural, not contractual: because inference, data, and state all run inside your perimeter, there is no traffic to police.</Info>
+
+The complete air-gapped procedure ships in the release package (`install/`), and every release bundle is self-contained by design — that is what the [package verification](/platform/release/release-package) chain exists for.
+
+<Snippet file="cta-architect.mdx" />

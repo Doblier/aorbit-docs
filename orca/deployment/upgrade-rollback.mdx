@@ -1,20 +1,12 @@
 ---
 title: "Upgrade & Rollback"
-description: "Supported paths, pre-upgrade checklist, and rollback procedure."
+description: "Versioned upgrades with a rehearsed way back."
 ---
 
-<Note>Draft skeleton. Owner: SRE lead.</Note>
+Upgrades follow the [versioning policy](/platform/release/versioning-policy): PATCH releases are drop-in; MINOR releases are rolling with no event loss; MAJOR releases ship a migration guide and are rehearsed in shadow before production.
 
-## Supported upgrade paths
+Every upgrade is preceded by a mandatory checkpoint set — Flink savepoints, schema-compatibility verification, ClickHouse backup — so rollback is a rehearsed procedure, not an improvisation. Recovery behavior is re-verified against the [chaos suite](/orca/operations/chaos-testing) at every MAJOR upgrade.
 
-## Pre-upgrade checklist
+Detailed per-version upgrade instructions ship with each release package and in the customer portal.
 
-Flink savepoints taken · schema compatibility verified · ClickHouse backup completed.
-
-## Rolling upgrade order
-
-## Post-upgrade verification
-
-## Rollback
-
-Procedure and data implications per component.
+<Snippet file="cta-architect.mdx" />

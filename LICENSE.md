@@ -2,7 +2,7 @@
 
 ## Documentation content
 
-Copyright © 2026 Doblier Inc. All rights reserved.
+Copyright © 2023 Doblier Inc. All rights reserved.
 
 The documentation in this repository — including all text, structure, diagrams, and images — is the proprietary work of Doblier Inc. It is published publicly for reading and reference. Except as permitted below, no part of it may be reproduced, redistributed, translated, or used to create derivative works without prior written permission from Doblier Inc.
 

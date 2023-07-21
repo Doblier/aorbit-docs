@@ -1,31 +1,20 @@
 ---
 title: "Installation"
-description: "Standard installation flow from verified package to healthy pipeline."
+description: "How an ORCA installation runs — from verified release package to healthy pipeline."
 ---
 
-<Note>Draft skeleton. Owner: SRE lead.</Note>
+ORCA installs from a **signed, versioned release package** ([contents & verification](/platform/release/release-package)) via Helm onto your Kubernetes — in-tenant, sovereign, or fully [air-gapped](/orca/deployment/air-gapped).
+
+## The installation flow
 
 <Steps>
-  <Step title="Obtain & verify the release package">
-    See [Release Packages & Verification](/platform/release/release-package).
-  </Step>
-  <Step title="Prepare the cluster">
-    Namespace, secrets, storage classes per [Prerequisites](/orca/deployment/requirements).
-  </Step>
-  <Step title="Install datastores">
-    Or attach existing ones — installation order and health checks.
-  </Step>
-  <Step title="Install the streaming layer">
-    Kafka, Schema Registry, Flink, Debezium.
-  </Step>
-  <Step title="Install ORCA services and the control tower">
-  </Step>
-  <Step title="Import dashboards & alert rules">
-    Grafana JSON ships in the release package.
-  </Step>
-  <Step title="Connect the first source and validate">
-    Confirm the healthy pipeline shape: event volume decreases monotonically across stages.
-  </Step>
-  <Step title="Run smoke tests and sign off">
-  </Step>
+  <Step title="Verify the release package">Checksums and cosign signature — supply-chain integrity before anything runs.</Step>
+  <Step title="Prepare the cluster">Namespaces, secrets, storage per the [prerequisites](/orca/deployment/requirements).</Step>
+  <Step title="Deploy datastores and streaming layer">Or attach existing estate services — no rip-and-replace.</Step>
+  <Step title="Deploy ORCA services and the control tower">Self-monitoring is installed with the platform, not after it.</Step>
+  <Step title="Connect the first source and validate the healthy shape">Event volume must decrease monotonically across stages before a second source is added.</Step>
 </Steps>
+
+The complete step-by-step guide — commands, values files, verification checks per step — ships inside the release package and the customer portal, versioned with each release. Installation of production deployments is performed jointly with Doblier engineers as part of the [go-live gate framework](/orca/readiness/go-live-gates).
+
+<Snippet file="cta-architect.mdx" />

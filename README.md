@@ -9,16 +9,16 @@ Official documentation for **AORBIT™** — the Autonomous Enterprise Intellige
 Docs-as-code, published by Mintlify. `main` **is** the live site: merge to `main` = published.
 
 1. Create a branch and edit/add `.mdx` files.
-2. Preview locally: `npx mint dev` → http://localhost:3000
+2. Preview locally: `npx mintlify@3.0.70 dev` → http://localhost:3000
 3. Open a pull request. The folder owner (see `.github/CODEOWNERS`) reviews.
 4. Merge → Mintlify deploys automatically.
 
-New pages must be added to `docs.json` navigation to appear on the site.
+New pages must be added to `mint.json` navigation to appear on the site.
 
 ## Repository layout
 
 ```
-docs.json        Site config & navigation (Mintlify)
+mint.json        Site config & navigation (Mintlify)
 index.mdx        Documentation home
 platform/        Cross-product docs: architecture, security, release policy
 orca/            ORCA — IT Operations & AIOps (AORBIT Intelligence)
@@ -42,4 +42,4 @@ orca/            ORCA — IT Operations & AIOps (AORBIT Intelligence)
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the style guide and [SECURITY.md](SECURITY.md) for vulnerability reporting.
 
 ---
-© 2026 Doblier Inc. DOBLIER™ and AORBIT™ are trademarks of Doblier Inc. See [LICENSE.md](LICENSE.md).
+© 2023 Doblier Inc. DOBLIER™ and AORBIT™ are trademarks of Doblier Inc. See [LICENSE.md](LICENSE.md).

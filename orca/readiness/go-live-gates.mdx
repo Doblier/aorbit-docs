@@ -1,25 +1,23 @@
 ---
 title: "Production Readiness: Go-Live Gates"
-description: "The gated framework every ORCA deployment passes before production."
+description: "No ORCA deployment reaches production on assumptions — six gates, evidence archived, named sign-offs."
 ---
 
-Every ORCA deployment passes a gated readiness framework with defined entry/exit criteria and named sign-offs. Sign-off roles span streaming, SRE, deployment, data, schema, and compliance; the evidence bundle is archived per gate.
+Every ORCA deployment passes a gated readiness framework before production. Each gate has defined entry/exit criteria and a named sign-off; sign-off roles span streaming, SRE, deployment, data, schema, and compliance, and the evidence bundle is archived per gate — the audit trail your risk function will ask for later, produced by default.
 
-<Note>Define gates 1–5 from the engagement playbook (install verified · sources connected · data quality · SLOs met · security review), then remove this note. Owner: SRE lead.</Note>
+| Gate | Proves |
+|---|---|
+| 1 · Installation verified | The platform runs as shipped, from a verified signed package |
+| 2 · Sources connected | Your real estate feeds the pipeline |
+| 3 · Data quality | The scorecard holds HIGH where it must |
+| 4 · SLOs met | T1 p99 ingestion→incident < 5s on your traffic |
+| 5 · Security review | Your security function signs, not ours |
+| 6 · **Chaos testing** | All [7 fault experiments](/orca/operations/chaos-testing) pass against production-sized state — recovery **measured**, never assumed |
 
-| Gate | Name | Exit criteria (summary) |
-|---|---|---|
-| 1 | Installation verified | |
-| 2 | Sources connected | |
-| 3 | Data quality | |
-| 4 | SLOs met | |
-| 5 | Security review | |
-| 6 | **Chaos testing** | All [7 fault experiments](/orca/operations/chaos-testing) pass against production-sized state; SRE lead sign-off |
+## Shadow mode — six weeks, deliberately
 
-## Shadow mode — six weeks
+ORCA runs alongside existing operations with no production actions for **six weeks, not four**: the window must cover month-end, a T1 change window, and off-hours — the real test of suppression correctness. Four weeks can miss a maintenance window entirely. This discipline came out of live banking deployment, not a slide.
 
-ORCA runs alongside existing operations with no production actions for **six weeks, not four**: the window must cover **month-end + a T1 change window + off-hours** — the key test of suppression correctness. Four weeks can miss a maintenance window entirely.
+Full gate criteria, sign-off templates, and the evidence-bundle specification are part of the engagement playbook.
 
-## Sign-off
-
-Roles, evidence bundle contents, and archive location per gate.
+<Snippet file="cta-architect.mdx" />

@@ -172,7 +172,7 @@ For each stage, the tables below give the level of detail a TDD needs: contract,
 |---|---|
 | Purpose | Collapse repeated emissions of the same underlying condition (flapping, re-notifies) into one logical event |
 | Technology | Flink job with RocksDB operator state; Redis Cluster holds the sliding dedup windows |
-| Key design point | Windows are **per-tier**: critical (T1) systems use tighter windows so real repeats surface fast; low tiers use wider windows for aggressive noise reduction |
+| Key design point | Dedup windows are **tier-aware** — tuned so critical-system repeats surface fast while low-tier noise is aggressively reduced. Window strategy is configured per estate during scoping |
 | State sizing | Dedup-state size is the dominant memory driver for both Redis and Flink — see [Sizing Guide](/orca/deployment/sizing). Vendor failover claims are re-validated against *your* state size, not lab defaults |
 | Failure semantics | Redis master loss → cluster failover < 10 s with **zero event loss** (measured, chaos experiment 1); during failover, events buffer in Kafka — nothing is dropped |
 
@@ -249,7 +249,7 @@ Volume must decrease **monotonically** left-to-right: dedup removes duplicates, 
 
 ## Streaming backbone
 
-- **Kafka (KRaft mode)** — the only transport in the hot path. Topics per stage boundary (`events.raw.*`, `events.normalized`, `events.deduped`, `events.enriched`, `events.actionable`, `incidents`); partitioning keyed by CI id so per-CI ordering is preserved end-to-end. Greenfield deployments start on Kafka 4.0+, whose consumer-rebalance protocol materially shortens broker-failure recovery.
+- **Kafka (KRaft mode)** — the only transport in the hot path. Topics per stage boundary (`events.raw.*`, `events.normalized`, `events.deduped`, `events.enriched`, `events.actionable`, `incidents`); partitioned so that per-CI event ordering is preserved end-to-end. Deployments use Kafka 3.4.1 in KRaft mode; consumer-group recovery is verified through chaos testing.
 - **Flink** — one job per stage; RocksDB state backend; periodic checkpoints to MinIO. Checkpointing is the recovery mechanism proven in chaos experiment 4.
 - **Schema Registry** — every topic schema versioned with enforced compatibility mode; producers cannot publish breaking changes. Local cache provides 30 minutes of registry-outage tolerance.
 - **Debezium CDC** — streams CMDB/configuration changes into the graph-sync path so topology used for correlation tracks reality, not last quarter's import.
@@ -387,3 +387,11 @@ TLS on every hop, mTLS service-to-service; encryption at rest per store; SSO (OI
 | CMDB / CSDM | In (+ drift flags out) | CDC via Debezium | [Data Model](/orca/architecture/data-model) |
 | Incident query / correlation-explain / remediation approval | Out | REST | [API](/orca/api/overview) |
 | Dashboards | Out | Prometheus / Grafana | [Monitoring](/orca/operations/monitoring) |
+
+---
+
+## Validate the fit for your estate
+
+The deepest layer — the correlation method itself, evidence-trail internals, and the feedback-loop mechanics — is presented to your architecture team under NDA as part of a design review. Bring your topology; we will walk your own failure scenarios through the pipeline.
+
+<Snippet file="cta-architect.mdx" />

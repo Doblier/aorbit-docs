@@ -1,30 +1,20 @@
 ---
 title: "Hardware Sizing Guide"
-description: "S/M/L deployment tiers and per-component sizing math."
+description: "How ORCA deployments are sized — and how to get sizing for your estate."
 ---
 
-<Note>Seed tiers from anonymized production-scale measurements. Infrastructure teams block on this page. Owner: SRE lead.</Note>
+ORCA deploys in three reference tiers. Sizing is driven by four measurable inputs from your environment: raw events/day, peak events/sec, dedup-state size (the dominant memory driver), and the size of your dependency graph.
 
-## Sizing tiers
+| Tier | Profile | Typical estate |
+|---|---|---|
+| **S — Pilot** | Single-zone, shadow-mode capable | Departmental estate, one or two source tools |
+| **M — Production** | Three failure domains, full HA | Enterprise estate, several thousand CIs |
+| **L — Bank-scale** | Three-zone, tier-segregated workloads | Full banking estate, strict T1 latency targets, proven at production scale |
 
-| Tier | Events/day (raw) | Peak events/sec | Nodes | Total vCPU / RAM | Storage |
-|---|---|---|---|---|---|
-| S — pilot | | | | | |
-| M | | | | | |
-| L — bank-scale | | | | | |
+## Why we don't publish generic numbers
 
-## Per-component sizing
+Sizing an event pipeline from averages is how deployments fail at month-end. Dedup-state size varies by an order of magnitude between two estates with identical daily volumes — which is also why we chaos-verify component failover against **your** state size rather than trusting vendor lab figures.
 
-- **Kafka** — broker count, partition strategy, retention vs disk.
-- **Flink** — task managers; RocksDB state sizing (dedup-state size drives both Flink memory and Redis).
-- **Neo4j** — heap/pagecache vs graph size.
-- **ClickHouse** — storage/retention math for the incident store.
-- **Redis Cluster** — memory vs dedup window per tier.
+Detailed sizing — node counts, per-component resource tables, Kubernetes requests/limits, and GPU sizing where applicable — is produced for your environment during scoping and delivered as part of the customer documentation set.
 
-## Kubernetes resources
-
-Requests/limits table per workload · storage classes · anti-affinity rules.
-
-## Capacity assumptions
-
-Ingest bandwidth, inter-AZ traffic, growth headroom guidance.
+<Snippet file="cta-architect.mdx" />
